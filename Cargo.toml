@@ -19,7 +19,7 @@ openssl = { version = "^0.10", features = ["vendored"] }
 libc = "0.2"
 amplify = "3"
 amplify_derive = "2.4"
-citadel = { git = "https://github.com/LNP-BP/rust-lnpbp" }
+citadel = { git = "https://github.com/mycitadel/citadel-runtime" }
 # slip132 = "0.3.2"
 # strict_encoding = { version = "1.0.7", features = ["chrono", "crypto", "miniscript", "derive"] }
 lnpbp = "0.4"

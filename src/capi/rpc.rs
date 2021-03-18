@@ -37,12 +37,22 @@ pub extern "C" fn citadel_run_embedded(
     data_dir: *const c_char,
     electrum_server: *const c_char,
 ) -> *mut citadel_client_t {
-    let mut config = citadel::server::Config {
+    let data_dir = if let Some(data_dir) = data_dir.try_as_str() {
+        PathBuf::from(data_dir)
+    } else {
+        return citadel_client_t::from_custom_err(
+            0, "Data dir must be specified as a valid filesystem path"
+        );
+    };
+
+    let mut config = citadel::runtime::Config {
         verbose: 4,
         rpc_endpoint: ZmqSocketAddr::Inproc(s!("citadel.rpc")),
         rgb20_endpoint: ZmqSocketAddr::Inproc(s!("rgb20.rpc")),
         rgb_embedded: true,
-        ..default!()
+        chain: Chain::Testnet3,
+        data_dir: PathBuf::from(data_dir),
+        electrum_server: s!("pandora.network:60001")
     };
 
     if let Some(chain) = chain.try_as_str() {
@@ -54,10 +64,6 @@ pub extern "C" fn citadel_run_embedded(
                 &format!("Unknown chain {}", chain),
             );
         }
-    }
-
-    if let Some(data_dir) = data_dir.try_as_str() {
-        config.data_dir = PathBuf::from(data_dir);
     }
 
     if let Some(electrum_server) = electrum_server.try_as_str() {
