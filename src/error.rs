@@ -1,119 +1,26 @@
-// MyCitadel: node, wallet library & command-line tool
-// Written in 2021 by
-//     Dr. Maxim Orlovsky <orlovsky@mycitadel.io>
+// Citadel C bindings library (libcitadel)
+// Written in 2020 by
+//     Dr. Maxim Orlovsky <orlovsky@pandoracore.com>
 //
 // To the extent possible under law, the author(s) have dedicated all
 // copyright and related and neighboring rights to this software to
 // the public domain worldwide. This software is distributed without
 // any warranty.
-//
-// You should have received a copy of the AGPL License
-// along with this software.
-// If not, see <https://www.gnu.org/licenses/agpl-3.0-standalone.html>.
 
-use std::io;
+use std::os::raw::c_int;
 
-use amplify::IoError;
-#[cfg(any(feature = "node", feature = "client"))]
-use internet2::TypeId;
-use internet2::{presentation, transport};
-#[cfg(any(feature = "node", feature = "client"))]
-use microservices::rpc;
-
-use crate::{cache, storage};
-
-#[derive(Clone, Debug, Display, From, Error)]
-#[display(doc_comments)]
-#[non_exhaustive]
-pub enum Error {
-    /// generic I/O error - {0:?}
-    #[from(io::Error)]
-    Io(IoError),
-
-    /// RPC error - {0}
-    #[cfg(any(feature = "node", feature = "client"))]
-    #[from]
-    Rpc(rpc::Error),
-
-    /// general networking error = {0}
-    #[from]
-    Networking(presentation::Error),
-
-    /// transport-level interface error - {0}
-    #[cfg(any(feature = "node", feature = "client"))]
-    #[from]
-    Transport(transport::Error),
-
-    /// provided RPC request (type id {0}) is not supported
-    #[cfg(any(feature = "node", feature = "client"))]
-    NotSupported(TypeId),
-
-    /// RGB node error - {0}
-    #[cfg(any(feature = "server", feature = "embedded"))]
-    #[from(rgb_node::i9n::Error)]
-    RgbNode(String),
-
-    /// electrum server error
-    #[from(electrum_client::Error)]
-    Electrum,
-
-    /// storage failure - {0}
-    #[cfg(any(feature = "server", feature = "embedded"))]
-    #[from]
-    StorageDriver(storage::Error),
-
-    /// cache failure - {0}
-    #[cfg(any(feature = "server", feature = "embedded"))]
-    #[from]
-    CacheDriver(cache::Error),
-
-    // TODO: split client- and server-side error types
-    /// server-reported failure
-    #[from]
-    #[display(inner)]
-    ServerFailure(rpc::Failure),
-
-    /// internal cache inconsistency; you need to refresh balances and try
-    /// again
-    CacheInconsistency,
-
-    /// strict data encoding data failure - {0}
-    #[from]
-    StrictEncoding(strict_encoding::Error),
-
-    /// in bitcoin consensus-encoded data failure
-    #[from(bitcoin::consensus::encode::Error)]
-    ConsensisEncoding,
-
-    /// base64 encoding failure - {0}
-    #[from]
-    Base64(base64::DecodeError),
-
-    /// Bech32 encoding failure
-    #[display(inner)]
-    #[from]
-    #[from(bech32::Error)]
-    Bech32(lnpbp::bech32::Error),
-
-    /// embedded node initialization failure
-    EmbeddedNodeInitError,
-
-    /// unexpected RPC API message; please check that the client version
-    /// matches server
-    UnexpectedApi,
-}
-
-impl microservices::error::Error for Error {}
-
-#[cfg(any(feature = "node", feature = "client"))]
-impl From<Error> for rpc::Error {
-    fn from(err: Error) -> Self {
-        match err {
-            Error::Rpc(err) => err,
-            err => rpc::Error::ServerFailure(rpc::Failure {
-                code: 2000,
-                info: err.to_string(),
-            }),
-        }
-    }
-}
+pub const SUCCESS: c_int = 0;
+pub const ERRNO_IO: c_int = 1;
+pub const ERRNO_RPC: c_int = 2;
+pub const ERRNO_NET: c_int = 3;
+pub const ERRNO_TRANSPORT: c_int = 4;
+pub const ERRNO_NOTSUPPORTED: c_int = 5;
+pub const ERRNO_STORAGE: c_int = 6;
+pub const ERRNO_SERVERFAIL: c_int = 7;
+pub const ERRNO_EMBEDDEDFAIL: c_int = 8;
+pub const ERRNO_UNINIT: c_int = 100;
+pub const ERRNO_CHAIN: c_int = 101;
+pub const ERRNO_JSON: c_int = 102;
+pub const ERRNO_BECH32: c_int = 103;
+pub const ERRNO_PARSE: c_int = 104;
+pub const ERRNO_NULL: c_int = 105;
