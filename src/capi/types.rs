@@ -59,6 +59,7 @@ impl From<invoice_type> for InvoiceType {
     }
 }
 
+// TODO: Provide memory release function for `prepared_transfer_t`
 #[allow(non_camel_case_types)]
 #[repr(C)]
 pub struct prepared_transfer_t {

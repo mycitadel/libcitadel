@@ -340,8 +340,8 @@ dependencies = [
 
 [[package]]
 name = "citadel"
-version = "0.1.0-beta"
-source = "git+https://github.com/mycitadel/citadel-runtime#43d59a407468bb3d7ef291bf3548a9a8218b5a1f"
+version = "0.1.0-rc"
+source = "git+https://github.com/mycitadel/citadel-runtime#780382917348422ea1267f5066d335d197b9363d"
 dependencies = [
  "amplify",
  "amplify_derive",
@@ -356,7 +356,7 @@ dependencies = [
  "lazy_static",
  "lnp-core",
  "lnpbp",
- "lnpbp_invoice",
+ "lnpbp-invoice",
  "log",
  "microservices",
  "miniscript",
@@ -931,8 +931,9 @@ dependencies = [
 
 [[package]]
 name = "internet2"
-version = "0.4.0-alpha.2"
-source = "git+https://github.com/internet2-org/rust-internet2#cdc483c6bb838aba6eb3ac2ab0b006addfc1093a"
+version = "0.3.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c2a07ae295e404b850980559ea28bd42e3bd43cdfd59ea704ad12e056bf510f7"
 dependencies = [
  "amplify",
  "amplify_derive",
@@ -958,9 +959,9 @@ checksum = "dd25036021b0de88a0aff6b850051563c6516d0bf53f8638938edbb9de732736"
 
 [[package]]
 name = "js-sys"
-version = "0.3.48"
+version = "0.3.49"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dc9f84f9b115ce7843d60706df1422a916680bfdfcbdb0447c5614ff9d7e4d78"
+checksum = "dc15e39392125075f60c95ba416f5381ff6c3a948ff02ab12464715adf56c821"
 dependencies = [
  "wasm-bindgen",
 ]
@@ -992,13 +993,13 @@ dependencies = [
 
 [[package]]
 name = "libc"
-version = "0.2.89"
+version = "0.2.90"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "538c092e5586f4cdd7dd8078c4a79220e3e168880218124dcbce860f0ea938c6"
+checksum = "ba4aede83fc3617411dc6993bc8c70919750c1c257c6ca6a502aed6e0e2394ae"
 
 [[package]]
 name = "libcitadel"
-version = "0.1.0-beta"
+version = "0.1.0-rc"
 dependencies = [
  "amplify",
  "amplify_derive",
@@ -1015,7 +1016,7 @@ dependencies = [
  "libc",
  "libsqlite3-sys",
  "lnpbp",
- "lnpbp_invoice",
+ "lnpbp-invoice",
  "log",
  "microservices",
  "miniscript",
@@ -1086,8 +1087,9 @@ checksum = "7fb9b38af92608140b86b693604b9ffcc5824240a484d1ecd4795bacb2fe88f3"
 
 [[package]]
 name = "lnp-core"
-version = "0.4.0-alpha.1"
-source = "git+https://github.com/LNP-BP/lnp-core#d526707a97d6b5782c646d423bb45d80eab1fe38"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b1c0d979dd4b7da78d2711d80f20fa8d68563109dbacb356f0d774153dad080c"
 dependencies = [
  "amplify",
  "amplify_derive",
@@ -1128,9 +1130,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "lnpbp_invoice"
-version = "0.4.0-alpha.1"
-source = "git+https://github.com/LNP-BP/rust-lnpbp#5bbbd2291d35408550eae62bcbd235308070cb02"
+name = "lnpbp-invoice"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bf03b7985c55ec3a1c229bcc4fd5d072df0de12acb45f8b3f0524361148e8a35"
 dependencies = [
  "amplify",
  "amplify_derive",
@@ -1191,8 +1194,9 @@ dependencies = [
 
 [[package]]
 name = "microservices"
-version = "0.4.0-beta"
-source = "git+https://github.com/internet2-org/rust-internet2#cdc483c6bb838aba6eb3ac2ab0b006addfc1093a"
+version = "0.3.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c19aadc1668716aaa566197321f18fca5cd14b685de0a7e0dd20cf6298297c70"
 dependencies = [
  "amplify",
  "amplify_derive",
@@ -1723,9 +1727,9 @@ dependencies = [
 
 [[package]]
 name = "rgb-core"
-version = "0.4.2"
+version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4abf30a6bd99279a794f8e9b2a71db895195726150071f35cdcaa9ae7e7503d2"
+checksum = "51fcee78b8a27e46ecc0238a170e1a353542bf501cac9082bd41678d48b7db5d"
 dependencies = [
  "amplify",
  "amplify_derive",
@@ -1733,6 +1737,7 @@ dependencies = [
  "bitcoin",
  "bitcoin_hashes 0.9.4",
  "chrono",
+ "clap 3.0.0-beta.2",
  "deflate",
  "descriptor-wallet",
  "ed25519-dalek",
@@ -1746,8 +1751,10 @@ dependencies = [
  "num-traits 0.2.14",
  "regex",
  "serde 1.0.124",
+ "serde_json",
  "serde_with",
  "serde_with_macros",
+ "serde_yaml",
  "strict_encoding",
 ]
 
@@ -1771,8 +1778,9 @@ dependencies = [
 
 [[package]]
 name = "rgb_node"
-version = "0.4.0-beta"
-source = "git+https://github.com/rgb-org/rgb-node#dbd138c5e4645ccff357417db3bfa13976c5f487"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "615e0bb88f1a94c3a2cc927ae882275bed80997430eec9ffc904060945551abd"
 dependencies = [
  "amplify",
  "amplify_derive",
@@ -2447,9 +2455,9 @@ checksum = "1a143597ca7c7793eff794def352d41792a93c481eb1042423ff7ff72ba2c31f"
 
 [[package]]
 name = "wasm-bindgen"
-version = "0.2.71"
+version = "0.2.72"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7ee1280240b7c461d6a0071313e08f34a60b0365f14260362e5a2b17d1d31aa7"
+checksum = "8fe8f61dba8e5d645a4d8132dc7a0a66861ed5e1045d2c0ed940fab33bac0fbe"
 dependencies = [
  "cfg-if",
  "wasm-bindgen-macro",
@@ -2457,9 +2465,9 @@ dependencies = [
 
 [[package]]
 name = "wasm-bindgen-backend"
-version = "0.2.71"
+version = "0.2.72"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5b7d8b6942b8bb3a9b0e73fc79b98095a27de6fa247615e59d096754a3bc2aa8"
+checksum = "046ceba58ff062da072c7cb4ba5b22a37f00a302483f7e2a6cdc18fedbdc1fd3"
 dependencies = [
  "bumpalo",
  "lazy_static",
@@ -2472,9 +2480,9 @@ dependencies = [
 
 [[package]]
 name = "wasm-bindgen-macro"
-version = "0.2.71"
+version = "0.2.72"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e5ac38da8ef716661f0f36c0d8320b89028efe10c7c0afde65baffb496ce0d3b"
+checksum = "0ef9aa01d36cda046f797c57959ff5f3c615c9cc63997a8d545831ec7976819b"
 dependencies = [
  "quote 1.0.9",
  "wasm-bindgen-macro-support",
@@ -2482,9 +2490,9 @@ dependencies = [
 
 [[package]]
 name = "wasm-bindgen-macro-support"
-version = "0.2.71"
+version = "0.2.72"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cc053ec74d454df287b9374ee8abb36ffd5acb95ba87da3ba5b7d3fe20eb401e"
+checksum = "96eb45c1b2ee33545a813a92dbb53856418bf7eb54ab34f7f7ff1448a5b3735d"
 dependencies = [
  "proc-macro2 1.0.24",
  "quote 1.0.9",
@@ -2495,15 +2503,15 @@ dependencies = [
 
 [[package]]
 name = "wasm-bindgen-shared"
-version = "0.2.71"
+version = "0.2.72"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7d6f8ec44822dd71f5f221a5847fb34acd9060535c1211b70a05844c0f6383b1"
+checksum = "b7148f4696fb4960a346eaa60bbfb42a1ac4ebba21f750f75fc1375b098d5ffa"
 
 [[package]]
 name = "web-sys"
-version = "0.3.48"
+version = "0.3.49"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ec600b26223b2948cedfde2a0aa6756dcf1fef616f43d7b3097aaf53a6c4d92b"
+checksum = "59fe19d70f5dacc03f6e46777213facae5ac3801575d56ca6cbd4c93dcd12310"
 dependencies = [
  "js-sys",
  "wasm-bindgen",
