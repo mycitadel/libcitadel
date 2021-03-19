@@ -9,6 +9,7 @@
 
 #![recursion_limit = "256"]
 #![feature(try_trait)]
+#![feature(vec_into_raw_parts)]
 // Coding conventions
 #![deny(
     non_upper_case_globals,

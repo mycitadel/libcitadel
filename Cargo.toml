@@ -1,6 +1,6 @@
 [package]
 name = "libcitadel"
-version = "0.1.0-rc"
+version = "0.1.0"
 description = "C-language bindings for Citadel runtime"
 authors = ["Dr Maxim Orlovsky <orlovsky@mycitadel.io>"]
 license = "MIT"
@@ -19,7 +19,7 @@ openssl = { version = "^0.10", features = ["vendored"] }
 libc = "0.2"
 amplify = "3"
 amplify_derive = "2.4"
-citadel = { git = "https://github.com/mycitadel/citadel-runtime" }
+citadel-runtime = "0.1"
 # slip132 = "0.3.2"
 lnpbp = "0.4"
 lnpbp-invoice = { version = "0.1.0", features = ["serde", "rgb"] }

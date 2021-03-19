@@ -339,9 +339,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "citadel"
-version = "0.1.0-rc"
-source = "git+https://github.com/mycitadel/citadel-runtime#780382917348422ea1267f5066d335d197b9363d"
+name = "citadel-runtime"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "803469364b0fabcffee51c7c5a7254f7cf2ef8487d86faa090616c44055efb89"
 dependencies = [
  "amplify",
  "amplify_derive",
@@ -999,7 +1000,7 @@ checksum = "ba4aede83fc3617411dc6993bc8c70919750c1c257c6ca6a502aed6e0e2394ae"
 
 [[package]]
 name = "libcitadel"
-version = "0.1.0-rc"
+version = "0.1.0"
 dependencies = [
  "amplify",
  "amplify_derive",
@@ -1009,7 +1010,7 @@ dependencies = [
  "bip39",
  "bitcoin",
  "cbindgen",
- "citadel",
+ "citadel-runtime",
  "descriptor-wallet",
  "env_logger",
  "internet2",
@@ -1778,9 +1779,9 @@ dependencies = [
 
 [[package]]
 name = "rgb_node"
-version = "0.4.0"
+version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "615e0bb88f1a94c3a2cc927ae882275bed80997430eec9ffc904060945551abd"
+checksum = "a9e4c0506094221f4134bb92ee73385f661e71540209c57bf80305411bd5d1af"
 dependencies = [
  "amplify",
  "amplify_derive",

@@ -26,7 +26,7 @@ use wallet::bip32::PubkeyChain;
 use wallet::Psbt;
 
 use super::{descriptor_type, invoice_type};
-use crate::capi::{prepared_transfer_t, AddressInfo};
+use crate::capi::{prepared_transfer_t, AddressInfo, validation_status_t};
 use crate::citadel_client_t;
 use crate::error::*;
 use crate::helpers::{TryAsStr, TryIntoRaw};
@@ -454,18 +454,18 @@ pub extern "C" fn citadel_psbt_publish(
 pub extern "C" fn citadel_invoice_accept(
     client: *mut citadel_client_t,
     consignment: *const c_char,
-) -> *const c_char {
+) -> validation_status_t {
     let client = citadel_client_t::from_raw(client);
 
     let consignment = match client.parse_string(consignment, "consignment").ok()
     {
-        None => return ptr::null(),
+        None => return validation_status_t::failure(),
         Some(v) => v,
     };
     let consignment = match Consignment::from_str(&consignment) {
         Err(err) => {
             client.set_error_details(ERRNO_PARSE, err);
-            return ptr::null();
+            return validation_status_t::failure();
         }
         Ok(v) => v,
     };
@@ -477,13 +477,13 @@ pub extern "C" fn citadel_invoice_accept(
         .map_err(|_| ())
         .and_then(|res| res.ok_or(()))
         .ok()
-        .and_then(|status| status.to_string().try_into_raw())
+        .map(validation_status_t::from)
     {
         client.set_success();
-        return status;
+        return status
     }
 
-    return ptr::null();
+    return validation_status_t::failure();
 }
 
 #[no_mangle]
